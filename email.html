@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CAB SERVICE</title>
+        <link rel="stylesheet" href="pro2.css">
+    </head>
+    <body>
+
+        <p class="info">
+            <a href="">Home</a>
+            &nbsp
+            <a href="">About Us</a>
+        </p>
+
+        <div class="top">
+            <h1 align="center">
+                <!-- <img src="E:\html/dsp3.png" height="100px" width="150px"> -->
+                CAB SERVICE
+            </h1>
+        </div>
+
+        <!-- <form id="bookingForm">
+            <div class="box1">
+                <div>
+                    <label for="source">Email Id</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+            </div>
+
+            <script src="pro2.js"></script>
+            <input type="button" value="Book My Cab">
+        </form> --> 
+
+
+
+        <div id="emailForm">
+            <h2 align='center'>Enter Email</h2>
+            <form onsubmit="return false;">
+                <!-- <label for="email">Email:</label> -->
+                <input type="email" id="email" placeholder="Enter your email" required>
+                <!-- <button onclick="confirmBooking()">Confirm Booking</button> -->
+                <input type="button" value="Confirm Booking" onclick="confirmBooking()">
+            </form>
+        </div>
+        
+        <script src="pro2.js"></script>
+        <script>
+            // function confirmBooking() {
+            //     const urlParams = new URLSearchParams(window.location.search);
+            //     const cabName = urlParams.get('cab');
+            //     const email = document.getElementById('email').value;
+        
+            //     if (!email) {
+            //         alert('Please enter a valid email address.');
+            //         return;
+            //     }
+        
+            //     // Perform booking logic here
+            //     alert(`Booking confirmed for ${cabName} with email ${email}!`);
+            //     // You can also redirect the user to a confirmation page or perform any other action here
+            // }
+
+
+            function confirmBooking() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const cabName = urlParams.get('cab');
+                const email = document.getElementById('email').value;
+
+                if (!email) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+
+                fetch('/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, cabName }),
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(`Booking confirmed for ${cabName}! Confirmation email sent to ${email}.`);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('Error confirming booking.');
+                });
+            }
+
+        </script>
+        
+
+        
+    </body>
+</html>
