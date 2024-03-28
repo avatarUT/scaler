@@ -13,8 +13,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'utkarshkumar957648@gmail.com',  // Your Gmail email address
-        pass: 'monu957648@123'  // Your Gmail password (use environment variables in production)
+        user: 'email'  // Your Gmail email address
+        pass: 'password'  // your password (use environment variables in production)
     }
 });
 
@@ -23,7 +23,7 @@ app.post('/send-email', (req, res) => {
     const { email, cabName } = req.body;
 
     const mailOptions = {
-        from: 'utkarshkumar957648@gmail.com',  // Sender email
+        from: 'email',  // Sender email
         to: email,  // Receiver email
         subject: 'Booking Confirmation',
         text: `Booking confirmed for ${cabName}!`
